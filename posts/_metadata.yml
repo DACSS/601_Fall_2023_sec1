@@ -2,8 +2,9 @@ comments:
   giscus:
     repo: DACSS/601_Fall_2023_sec1
     category: Announcements
-toc-location: right
-search: true
+    mapping: url
+toc-location: left
+search: false
 execute:
   freeze: true
   error: true
