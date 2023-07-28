@@ -1,9 +1,9 @@
 comments:
   giscus:
-    repo: DACSS/DACSS_[Course Number]_[Course Name_[term]
+    repo: DACSS/601_Fall_2023_sec1
     category: Announcements
 toc-location: right
 search: true
 execute:
-  freeze: auto
+  freeze: true
   error: true

@@ -1,7 +1,7 @@
 ---
 title: "Blog Post Template"
 author: "Your Name"
-desription: "Something to describe what I did"
+description: "Something to describe what I did"
 date: "08/02/2022"
 format:
   html:
