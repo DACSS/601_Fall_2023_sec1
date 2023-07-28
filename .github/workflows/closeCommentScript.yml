@@ -1,0 +1,40 @@
+name: Auto Close if submitted on Wrong branch
+
+on:
+  pull_request_target:
+    branches:
+      - template
+    types: [opened, synchronize, reopened]
+
+jobs:
+  auto-close-template:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check for valid user
+        run: |
+          ALLOWED_USERS=("SidharthSaluja" "dongericoyu")
+          user="${{ github.event.pull_request.user.login }}"
+          echo $user
+          user_is_allowed=false
+          for ALLOWED_USER in "${ALLOWED_USERS[@]}"; do
+            if [[ "$ALLOWED_USER" == "$user" ]]; then
+              user_is_allowed=true
+              echo "sucess!"
+              break
+            fi
+          done
+          echo "allowed=$user_is_allowed" >> $GITHUB_ENV
+          echo "allowed=$user_is_allowed"
+
+      - name: Close pull request
+        if: ${{ env.allowed == 'false'}}
+        uses: peter-evans/close-pull@v3
+        with:
+          comment: This is Sidharth bot - Please submit in the submission branch instead of the template branch
